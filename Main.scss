@@ -1,0 +1,286 @@
+// Variables and color scheme for dark theme 
+$primary-color: #2a9d8f;
+$secondary-color: #264653;
+$background-dark: #1a1a1a;
+$text-color: #ffffff;
+$error-color: #e76f51;
+$success-color: #2a9d8f;
+$border-color: #444;
+
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $background-dark;
+  color: $text-color;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Header
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h1 {
+    color: $primary-color;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+}
+
+// Settings
+.settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color:($background-dark);
+  border-radius: 10px;
+
+  .setting-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    label {
+      font-weight: 600;
+      button{
+        
+      }
+    }
+  }
+
+  .time-options {
+    display: flex;
+    gap: 0.5rem;
+
+    .time-option {
+      padding: 0.5rem 1rem;
+      background-color: $secondary-color;
+      border: none;
+      border-radius: 4px;
+      color: $text-color;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: lighten($secondary-color, 10%);
+      }
+
+      &.active {
+        background-color: $primary-color;
+      }
+    }
+  }
+
+  .language-select {
+    padding: 0.5rem;
+    background-color: $secondary-color;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    color: $text-color;
+  }
+
+  .restart-button {
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    border: none;
+    border-radius: 4px;
+    color: $text-color;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+}
+
+// Timer
+.timer {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .timer-display {
+    font-size: 3rem;
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+  }
+
+  .timer-status {
+    color: #999;
+    font-style: italic;
+  }
+}
+
+// Typing Area
+.typing-area {
+  background-color: #1f1f1f; // darker neutral background
+  border: 2px solid $border-color;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  min-height: 220px;
+  cursor: text;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  .words-container {
+    font-size: 1.6rem;
+    line-height: 2.2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    user-select: none; // prevent accidental text selection
+
+    .word {
+      &.current {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 2px 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+
+      &.completed {
+        opacity: 0.6;
+      }
+
+      .char {
+        &.correct {
+          color: #2ecc71; // bright green
+        }
+
+        &.incorrect {
+          color: #e74c3c; // bright red
+          text-decoration: underline;
+          animation: shake 0.15s;
+        }
+      }
+    }
+  }
+  // Shake animation for errors
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+  .hidden-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+.instruction {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+// Results
+.results {
+  text-align: center;
+  padding: 2rem;
+
+  h2 {
+    margin-bottom: 2rem;
+    color: $primary-color;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 3rem;
+    margin-bottom: 1rem 0;
+
+    .timer, .wpm, .accuracy {
+      font-size: bold;
+      font-size: 1.2rem;
+      color: $primary-color;
+    }
+
+    .stat {
+      .stat-value {
+        font-size: 3rem;
+        font-weight: bold;
+        color: $primary-color;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  .typing-area {font-size: 1.2rem;}
+  .stats-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .settings-panel {
+   width: 100%;
+  }
+
+    
+  
+
+  .settings {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+  
+  }
+
+  .typing-area {
+    padding: 1rem;
+    font-size: 1rem;
+    
+    .words-container {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      word-break: break-word; //ensure long words wrap on mobile
+    }
+  }
+}
